@@ -4,9 +4,9 @@ public class AuthModel{
 	private String password;
 	private String username;
 
-	public AuthModel(String password, String username) {
-		this.password = password;
+	public AuthModel(String username, String password) {
 		this.username = username;
+		this.password = password;
 	}
 
 	public void setPassword(String password){
