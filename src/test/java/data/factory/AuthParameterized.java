@@ -16,6 +16,7 @@ import java.util.Arrays;
 import java.util.Collection;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.equalTo;
 
 @RunWith(Parameterized.class)
 public class AuthParameterized extends BaseTest {
@@ -54,6 +55,7 @@ public class AuthParameterized extends BaseTest {
                 .body(auth)
                 .post(AUTH)
                 .then()
+                .contentType(equalTo("application/json; charset=utf-8"))
                 .extract().statusCode();
         Assert.assertEquals("Status Code Shoul be: ",status,response);
     }

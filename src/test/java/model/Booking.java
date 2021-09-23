@@ -1,12 +1,18 @@
 package model;
 
+
 public class Booking{
 	private String firstname;
+	private String lastname;
 	private String additionalneeds;
 	private Bookingdates bookingdates;
 	private int totalprice;
 	private boolean depositpaid;
-	private String lastname;
+
+	public Booking(String firstname, String lastname) {
+		this.firstname = firstname;
+		this.lastname = lastname;
+	}
 
 	public void setFirstname(String firstname){
 		this.firstname = firstname;
@@ -55,4 +61,5 @@ public class Booking{
 	public String getLastname(){
 		return lastname;
 	}
+
 }
