@@ -36,11 +36,11 @@ public class AuthParameterized extends BaseTest {
     @Parameterized.Parameters(name = "user: {0}, password: {1}")
     public static Collection inputAuth(){
         return Arrays.asList(new Object[][] {
+                {"admin", "password123", 200},
                 {"user", "password", 400},
-                {"user", "password", 400},
-                {"user", "password", 200},
-                {"user", "password", 200},
-                {null, "password", 200},
+                {null, null, 400},
+                {"user", null, 400},
+                {null, "password", 400},
         });
     }
 
