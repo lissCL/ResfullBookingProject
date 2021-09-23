@@ -21,6 +21,8 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static setup.Methods.getToken;
+
 public abstract class BaseTest {
 
     public static final String BASIC_AUTHENTICATION = "Basic YWRtaW46cGFzc3dvcmQxMjM=";
@@ -64,15 +66,7 @@ public abstract class BaseTest {
                 .build();
     }
 
-    public static String getToken() {
-        Response response = RestAssured.given().body("{\n" +
-                "    \"username\" : \"admin\",\n" +
-                "    \"password\" : \"password123\"\n" +
-                "}").contentType("application/json")
-                .when().post("/auth");
-        String token = response.path("token");
-        return token;
-    }
+
 
 
 

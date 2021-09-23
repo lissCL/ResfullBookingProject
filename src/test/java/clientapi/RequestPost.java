@@ -19,8 +19,6 @@ public class RequestPost extends BaseTest {
     Date convertedDate1 = null;
     Date convertedDate2 = null;
 
-//    Data data = new Data();
-//    Object[][] bookingParameters= data.bookingParameters();
 
 
     @Test//(testName = "Create Booking ")
