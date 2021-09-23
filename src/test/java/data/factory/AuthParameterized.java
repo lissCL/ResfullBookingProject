@@ -40,7 +40,7 @@ public class AuthParameterized extends BaseTest {
                 {"user", "password", 400},
                 {"user", "password", 200},
                 {"user", "password", 200},
-                {"user", "password", 200},
+                {null, "password", 200},
         });
     }
 
