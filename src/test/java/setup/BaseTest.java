@@ -38,14 +38,16 @@ public abstract class BaseTest {
     public static void setup() throws FileNotFoundException {
         logger.info("Iniciando la configuracion");
         RestAssured.requestSpecification = defaultRequestSpecification();
-        logger.info("Configuration exitosa.");
+        //logger.info("Configuration exitosa.");
+
+
     }
 
     private static RequestSpecification defaultRequestSpecification() throws FileNotFoundException {
 
         List<Filter> filters = new ArrayList<>();
         //filters.add(new RequestLoggingFilter());
-        filters.add(new ResponseLoggingFilter());
+        //filters.add(new ResponseLoggingFilter());
         filters.add(new AllureRestAssured());
 
         return new RequestSpecBuilder().setBaseUri(URL)
@@ -53,18 +55,18 @@ public abstract class BaseTest {
                 .setContentType(ContentType.JSON).build();
     }
 
-    public ResponseSpecification defaultResponseSpecification() {
-        return new ResponseSpecBuilder()
-                .expectContentType(ContentType.JSON)
-                .build();
-    }
+//    public ResponseSpecification defaultResponseSpecification() {
+//        return new ResponseSpecBuilder()
+//                .expectContentType(ContentType.JSON)
+//                .build();
+//    }
 
-    public static void getTokenBuild() {
-        Cookie cookie2 = new Cookie.Builder(TOKEN_HEADER, getToken()).setComment("comment 2").build();
-        RestAssured.requestSpecification = new RequestSpecBuilder()
-                .addCookie(cookie2)
-                .build();
-    }
+//    public static void getTokenBuild() {
+//        Cookie cookie2 = new Cookie.Builder(TOKEN_HEADER, getToken()).setComment("comment 2").build();
+//        RestAssured.requestSpecification = new RequestSpecBuilder()
+//                .addCookie(cookie2)
+//                .build();
+//    }
 
 
 
