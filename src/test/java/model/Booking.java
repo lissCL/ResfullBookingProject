@@ -14,7 +14,7 @@ public class Booking{
 		this.lastname = lastname;
 	}
    private BookingDates bookingdates;
-	private String lastname;
+	//private String lastname;
 
 
     public Booking(String firstname, String lastname, int totalprice, boolean depositpaid, String bookingdates_checkin, String bookingdates_checkout, String additionalneeds) {

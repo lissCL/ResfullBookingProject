@@ -38,10 +38,10 @@ public class RequestPatch extends BaseTest {
                 .header(BASIC_AUTHENTICATION_HEADER, BASIC_AUTHENTICATION)
                 //.header("Authorization", "Basic YWRtaW46cGFzc3dvcmQxMjM=")
                 .when()
-                .patch("https://restful-booker.herokuapp.com/booking/3")
+                .patch(BOOKING + 65)
                 .then()
                 .assertThat()
-                //.statusCode(HttpStatus.SC_NOT_FOUND)
+                .statusCode(HttpStatus.SC_NOT_FOUND)
                 .log().all();
 
     }

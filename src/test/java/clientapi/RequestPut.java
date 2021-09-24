@@ -44,7 +44,7 @@ public class RequestPut extends BaseTest {
         Booking bookigpost = new Booking(firstname, lastname, totalprice, depositpaid,
                 this.bookingdates.getCheckin(), this.bookingdates.getCheckout(), additionalneeds);
 //
-        var response = given()
+        int response = given()
                 .header(BASIC_AUTHENTICATION_HEADER, BASIC_AUTHENTICATION)
                 .with()
                 .body(bookigpost)
@@ -52,7 +52,7 @@ public class RequestPut extends BaseTest {
                 .then()
                 .header("Content-Type", "application/json; charset=utf-8")
                 .body("$", hasKey("firstname"))
-                .log().all();
+                .log().all()
 //                .body(containsString("firstname"))
 //                .body("$", hasKey("lastname"))
 //                .body(containsString("lastname"))
@@ -66,7 +66,7 @@ public class RequestPut extends BaseTest {
 //                .body("bookingdates.checkin", Matchers.not(Matchers.isEmptyOrNullString()))
 //                .body("bookingdates.checkout", Matchers.not(Matchers.isEmptyOrNullString()))
 //                .body("additionalneeds", Matchers.equalTo(additionalneeds))
-//                .extract().statusCode();
+                 .extract().statusCode();
 
         Assert.assertEquals("Status Code Should be: ", status, response);
     }
