@@ -20,10 +20,8 @@ public class RequestPost extends BaseTest {
     Date convertedDate2 = null;
 
 
-
     @Test//(testName = "Create Booking ")
     public void createBooking() {
-
 
         given()
                 .contentType(ContentType.JSON)
@@ -80,4 +78,12 @@ public class RequestPost extends BaseTest {
 	        convertedDate2 =(Date) formatter.parse(yyyyMMdd2);
 	        System.out.println("Date from yyyyMMdd1 and yyyyMMdd2 Strings in Java : " + convertedDate1 + " "+convertedDate2);
 	*/   // }
+//.body(containsString("");
+
+
+
+
+
+
+
 }

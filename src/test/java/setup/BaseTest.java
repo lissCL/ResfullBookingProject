@@ -3,16 +3,8 @@ package setup;
 import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
-import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.filter.Filter;
-import io.restassured.filter.log.RequestLoggingFilter;
-import io.restassured.filter.log.ResponseLoggingFilter;
-import io.restassured.http.ContentType;
-import io.restassured.http.Cookie;
-import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import io.restassured.specification.ResponseSpecification;
-import org.apache.http.HttpStatus;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.BeforeClass;
@@ -20,8 +12,6 @@ import org.junit.BeforeClass;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
-
-import static setup.Methods.getToken;
 
 public abstract class BaseTest {
 
@@ -39,6 +29,7 @@ public abstract class BaseTest {
         logger.info("Iniciando la configuracion");
         RestAssured.requestSpecification = defaultRequestSpecification();
         //logger.info("Configuration exitosa.");
+
     }
 
     private static RequestSpecification defaultRequestSpecification() throws FileNotFoundException {
@@ -50,7 +41,7 @@ public abstract class BaseTest {
 
         return new RequestSpecBuilder().setBaseUri(URL)
                 .addFilters(filters)
-                .setContentType(ContentType.JSON).build();
+                .build();
     }
 
 //    public ResponseSpecification defaultResponseSpecification() {
@@ -65,9 +56,6 @@ public abstract class BaseTest {
 //                .addCookie(cookie2)
 //                .build();
 //    }
-
-
-
 
 
 }
