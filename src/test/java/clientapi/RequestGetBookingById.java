@@ -3,6 +3,7 @@ package clientapi;
 import org.apache.http.HttpStatus;
 import org.junit.Test;
 import setup.BaseTest;
+import setup.Methods;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.containsString;
@@ -14,8 +15,9 @@ public class RequestGetBookingById extends BaseTest {
     public void get_Booking_By_Id() {
         given()
                 .when()
-                .get(BOOKING + "2")
+                .get(BOOKING + Methods.getValidIdBooking())
                 .then()
+                .assertThat()
                 .statusCode(HttpStatus.SC_OK)
                 .body("$", hasKey("firstname"))
                 .body(containsString("firstname"))

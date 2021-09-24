@@ -34,19 +34,18 @@ public class RequestGetBookingByDates extends BaseTest {
         GetDatesModel getDatesModel = new GetDatesModel(checkin, checkout);
 //        ResponseItem response = new ResponseItem();
         int response = given()
-                .log().all()
                 .when()
                 .get(BOOKING + "?" + "checkin=" + getDatesModel.getCheckin() + "&" + "checkout=" + getDatesModel.getCheckout()) //.param("id",getFirstIdBooking())
                 .then()
+                .assertThat()
                 .body("[0]", hasKey("bookingid"))
                 .body("[0]", notNullValue())
                 .body("bookingid", hasSize(greaterThan(10))) //review
-                .log().all()
                 .extract().statusCode();
         Assert.assertEquals("Status Code Shoul be: ", status, response);
     }
 
-    @Parameterized.Parameters
+    @Parameterized.Parameters(name = "checkIn: {0}, checkOut: {1}")
     public static Collection dates() {
         return Arrays.asList(new Object[][]{
                 {"2010-02-06", "2022-02-02", 200}, //boundary values
