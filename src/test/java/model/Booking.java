@@ -8,6 +8,15 @@ public class Booking{
 	private boolean depositpaid;
 	private String lastname;
 
+	public Booking(String firstname, String lastname, int totalprice, boolean depositpaid, String bookingdates_checkin, String bookingdates_checkout, String additionalneeds ) {
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.totalprice = totalprice;
+		this.depositpaid = depositpaid;
+		this.bookingdates = new Bookingdates(bookingdates_checkin, bookingdates_checkout);
+		this.additionalneeds = additionalneeds;
+	}
+
 	public void setFirstname(String firstname){
 		this.firstname = firstname;
 	}

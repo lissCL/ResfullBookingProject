@@ -4,7 +4,13 @@ public class Bookingdates{
 	private String checkin;
 	private String checkout;
 
-	public void setCheckin(String checkin){
+	public Bookingdates(String checkin, String checkout){
+		this.checkin = checkin;
+		this.checkout = checkout;
+	}
+
+
+    public void setCheckin(String checkin){
 		this.checkin = checkin;
 	}
 

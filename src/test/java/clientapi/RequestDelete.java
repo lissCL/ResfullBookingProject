@@ -75,6 +75,5 @@ public class RequestDelete extends BaseTest {
 
         //Verify that the id should not deleted
         Assert.assertEquals("Status code Should be 200 : ",getStatusResponse(testId), HttpStatus.SC_OK);
-
     }
 }
