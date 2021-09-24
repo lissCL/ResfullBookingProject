@@ -1,5 +1,8 @@
 package clientapi;
 
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.junit4.DisplayName;
 import model.BookingDates;
 import org.junit.Assert;
 import org.junit.Test;
@@ -11,9 +14,7 @@ import java.util.Arrays;
 import java.util.Collection;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.hasKey;
-import static org.hamcrest.Matchers.hasSize;
-import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.*;
 
 @RunWith(Parameterized.class)
 public class RequestGetBookingByDates extends BaseTest {
@@ -29,18 +30,20 @@ public class RequestGetBookingByDates extends BaseTest {
 
     //Method get filter by Dates
     @Test
+    @Severity(SeverityLevel.NORMAL)
+    @DisplayName("We Should search booking with date filter")
     public void getFiltersByDates() {
         BookingDates getDatesModel = new BookingDates(checkin, checkout);
 //        ResponseItem response = new ResponseItem();
         int response = given()
                 .when()
-                .get(BOOKING + "?" + "checkin=" + getDatesModel.getCheckin() + "&" + "checkout=" + getDatesModel.getCheckout()) //.param("id",getFirstIdBooking())
+                    .get(BOOKING + "?" + "checkin=" + getDatesModel.getCheckin() + "&" + "checkout=" + getDatesModel.getCheckout()) //.param("id",getFirstIdBooking())
                 .then()
-                .assertThat()
-                .body("[0]", hasKey("bookingid"))
-                .body("[0]", notNullValue())
-                //.body("bookingid", hasSize(greaterThan(10))) //review
-                .extract().statusCode();
+                    .assertThat()
+                    .body("[0]", hasKey("bookingid"))
+                    .body("[0]", notNullValue())
+                    .body("bookingid", hasSize(greaterThan(10))) //review
+                    .extract().statusCode();
         Assert.assertEquals("Status Code Shoul be: ", status, response);
     }
 

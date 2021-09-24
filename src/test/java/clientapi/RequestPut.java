@@ -1,21 +1,19 @@
 package clientapi;
 
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.junit4.DisplayName;
 import model.Booking;
 import model.BookingDates;
-import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import setup.BaseTest;
 import setup.Methods;
-
-import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Collection;
-
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.hasKey;
 import static setup.Methods.getToken;
 
@@ -40,6 +38,8 @@ public class RequestPut extends BaseTest {
     }
 
     @Test
+    @Severity(SeverityLevel.CRITICAL)
+    @DisplayName("We Should update Booking with basic auth ")
     public void updateBookingBasicAuth() {
         Booking bookigpost = new Booking(firstname, lastname, totalprice, depositpaid,
                 this.bookingdates.getCheckin(), this.bookingdates.getCheckout(), additionalneeds);
@@ -50,8 +50,8 @@ public class RequestPut extends BaseTest {
                 .body(bookigpost)
                 .put(BOOKING + "2")
                 .then()
-                //.header("Content-Type", "application/json; charset=utf-8")
-                //.body("$", hasKey("firstname"))
+                .header("Content-Type", "application/json; charset=utf-8")
+                .body("$", hasKey("firstname"))
                 .log().all()
 //                .body(containsString("firstname"))
 //                .body("$", hasKey("lastname"))
@@ -84,11 +84,11 @@ public class RequestPut extends BaseTest {
                 .put(BOOKING + Methods.getValidIdBooking())
                 .then()
                 .assertThat();
-                //.body("$", hasKey("firstname"))
-                //.body(containsString("firstname"))
-                //.body("$", hasKey("lastname"))
-                //.body(containsString("lastname"))
-                //.body("$", hasKey("totalprice"))
+        //.body("$", hasKey("firstname"))
+        //.body(containsString("firstname"))
+        //.body("$", hasKey("lastname"))
+        //.body(containsString("lastname"))
+        //.body("$", hasKey("totalprice"))
 //                .body("$", hasKey("depositpaid"))
 //                .body("$", hasKey("bookingdates"))
 //                .body("firstname", Matchers.equalTo(firstname))
@@ -98,7 +98,7 @@ public class RequestPut extends BaseTest {
 //                .body("bookingdates.checkin", Matchers.not(Matchers.isEmptyOrNullString()))
 //                .body("bookingdates.checkout", Matchers.not(Matchers.isEmptyOrNullString()))
 //                .body("additionalneeds", Matchers.equalTo(additionalneeds))
-                //.statusCode(status);
+        //.statusCode(status);
     }
 
     @Parameterized.Parameters(name = "name: {0}, expected: {7}")

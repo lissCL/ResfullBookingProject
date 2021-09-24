@@ -1,6 +1,5 @@
 package model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Booking{
 	private String firstname;

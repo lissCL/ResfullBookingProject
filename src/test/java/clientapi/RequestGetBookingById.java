@@ -14,9 +14,8 @@ public class RequestGetBookingById extends BaseTest {
     @Test
     public void get_Booking_By_Id() {
         given()
-                .when()
                 .get(BOOKING + Methods.getValidIdBooking())
-                .then()
+        .then()
                 .assertThat()
                 .statusCode(HttpStatus.SC_OK)
                 .body("$", hasKey("firstname"))
@@ -32,9 +31,8 @@ public class RequestGetBookingById extends BaseTest {
     @Test
     public void getBookingsId2() {
         given()
-                .when()
                 .get(BOOKING + "100")
-                .then()
+        .then()
                 .assertThat()
                 .statusCode(HttpStatus.SC_NOT_FOUND);
     }
