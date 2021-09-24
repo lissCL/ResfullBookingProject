@@ -4,6 +4,8 @@ import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.filter.Filter;
+import io.restassured.filter.log.RequestLoggingFilter;
+import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.specification.RequestSpecification;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -35,27 +37,14 @@ public abstract class BaseTest {
     private static RequestSpecification defaultRequestSpecification() throws FileNotFoundException {
 
         List<Filter> filters = new ArrayList<>();
-        //filters.add(new RequestLoggingFilter());
-        //filters.add(new ResponseLoggingFilter());
+        filters.add(new RequestLoggingFilter());
+        filters.add(new ResponseLoggingFilter());
         filters.add(new AllureRestAssured());
 
         return new RequestSpecBuilder().setBaseUri(URL)
                 .addFilters(filters)
                 .build();
     }
-
-//    public ResponseSpecification defaultResponseSpecification() {
-//        return new ResponseSpecBuilder()
-//                .expectContentType(ContentType.JSON)
-//                .build();
-//    }
-
-//    public static void getTokenBuild() {
-//        Cookie cookie2 = new Cookie.Builder(TOKEN_HEADER, getToken()).setComment("comment 2").build();
-//        RestAssured.requestSpecification = new RequestSpecBuilder()
-//                .addCookie(cookie2)
-//                .build();
-//    }
 
 
 }
