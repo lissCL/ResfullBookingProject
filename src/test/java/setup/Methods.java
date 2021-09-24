@@ -2,6 +2,13 @@ package setup;
 
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
+import org.apache.http.HttpStatus;
+import org.junit.Assert;
+
+import java.util.List;
+
+import static io.restassured.RestAssured.given;
+import static io.restassured.path.json.JsonPath.from;
 
 public class Methods extends BaseTest{
 
@@ -11,13 +18,21 @@ public class Methods extends BaseTest{
         return Integer.parseInt(bookingId);
     }
     public static String getResponse(int id) {
-        String response = RestAssured.given().get(BOOKING + id).asString();
-        return response;
+        return  RestAssured.given().get(BOOKING + id).asString();
+
     }
     public static int getStatusResponse(int id) {
-        int response = RestAssured.given().get(BOOKING + id).statusCode();
-        return response;
+        return RestAssured.given().get(BOOKING + id).statusCode();
+
     }
+    public static void ifExistBooking(List<Integer> bookingMapint){
+        //List<Integer> bookingMapint= from(responseBooking).getList("bookingid");
+
+        for(Integer element : bookingMapint){
+            Assert.assertEquals("Status code Should be 200 : ",getStatusResponse(element), HttpStatus.SC_OK);
+        }
+    }
+
     public static String getToken() {
         Response response = RestAssured.given().body("{\n" +
                 "    \"username\" : \"admin\",\n" +
