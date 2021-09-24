@@ -1,11 +1,11 @@
 package data.factory;
 
 
-import io.restassured.RestAssured;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.http.ContentType;
-import io.restassured.response.Response;
 import model.AuthModel;
-import org.apache.http.HttpStatus;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,8 +32,8 @@ public class AuthParameterized extends BaseTest {
     }
 
     @Parameterized.Parameters(name = "user: {0}, password: {1}")
-    public static Collection inputAuth(){
-        return Arrays.asList(new Object[][] {
+    public static Collection inputAuth() {
+        return Arrays.asList(new Object[][]{
                 {"admin", "password123", 200},
                 {"user", "password", 400},
                 {null, null, 400},
@@ -43,8 +43,10 @@ public class AuthParameterized extends BaseTest {
     }
 
     @Test
-    public void requestAuthwithData(){
-        AuthModel auth=new AuthModel(username,password);
+    @Severity(SeverityLevel.CRITICAL)
+    @DisplayName("We Should generate Token")
+    public void requestAuthwithData() {
+        AuthModel auth = new AuthModel(username, password);
 
         int response = given()
                 .contentType(ContentType.JSON).log().all()
@@ -53,7 +55,7 @@ public class AuthParameterized extends BaseTest {
                 .post(AUTH)
                 .then()
                 .extract().statusCode();
-        Assert.assertEquals("Status Code Shoul be: ",status,response);
+        Assert.assertEquals("Status Code Should be: ", status, response);
     }
 
 
