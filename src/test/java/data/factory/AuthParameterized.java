@@ -31,8 +31,6 @@ public class AuthParameterized extends BaseTest {
         this.status = status;
     }
 
-
-
     @Parameterized.Parameters(name = "user: {0}, password: {1}")
     public static Collection inputAuth(){
         return Arrays.asList(new Object[][] {
