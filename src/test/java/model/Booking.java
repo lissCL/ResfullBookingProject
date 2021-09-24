@@ -1,15 +1,21 @@
 package model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Booking{
 	private String firstname;
+	private String lastname;
 	private String additionalneeds;
     private int totalprice;
 	private boolean depositpaid;
-	@JsonProperty("bookingdates")
-    private BookingDates bookingdates;
+
+
+	public Booking(String firstname, String lastname) {
+		this.firstname = firstname;
+		this.lastname = lastname;
+	}
+   private BookingDates bookingdates;
 	private String lastname;
+
 
     public Booking(String firstname, String lastname, int totalprice, boolean depositpaid, String bookingdates_checkin, String bookingdates_checkout, String additionalneeds) {
         this.firstname = firstname;
@@ -67,4 +73,5 @@ public class Booking{
 	public String getLastname(){
 		return lastname;
 	}
+
 }

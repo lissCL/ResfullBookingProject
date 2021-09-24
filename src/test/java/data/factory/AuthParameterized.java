@@ -1,11 +1,7 @@
 package data.factory;
 
-
-import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
-import io.restassured.response.Response;
 import model.AuthModel;
-import org.apache.http.HttpStatus;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,6 +12,7 @@ import java.util.Arrays;
 import java.util.Collection;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.equalTo;
 
 @RunWith(Parameterized.class)
 public class AuthParameterized extends BaseTest {
@@ -43,17 +40,23 @@ public class AuthParameterized extends BaseTest {
     }
 
     @Test
-    public void requestAuthwithData(){
+    public void requestAuthWithData(){
         AuthModel auth=new AuthModel(username,password);
 
         int response = given()
-                .contentType(ContentType.JSON).log().all()
-                .header("Accept", "application/json")
-                .body(auth)
-                .post(AUTH)
-                .then()
-                .extract().statusCode();
-        Assert.assertEquals("Status Code Shoul be: ",status,response);
+                            .contentType(ContentType.JSON).log().all()
+                            .header("Accept", "application/json")
+                            .body(auth)
+                            .post(AUTH)
+                      .then()
+                            .assertThat()
+                            .contentType(equalTo("application/json; charset=utf-8"))
+                            .log().all()
+                            .extract().statusCode();
+
+            Assert.assertEquals("Status Code Shoul be: ",status,response);
+            //Assert.assertTrue("The response should be BAD CREDENCIALS",status == 200);
+
     }
 
 
