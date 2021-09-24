@@ -1,31 +1,33 @@
-pipeline {
+pipeline{
     agent any
-    stages {
-        stage('build') {
-            steps {
-                git 'https://github.com/jdmesalosada/restassured-pocs-jm.git'
+    stages
+            {
+                stage('Download code')
+                        {
+                            steps{
+                                git 'https://github.com/lissCL/ResfullBookingProject.git'
+                            }
+                        }
+                stage('Run tests')
+                        {
+                            steps{
+                                withGradle{
+                                    sh '/var/lib/jenkins/tools/hudson.plugins.gradle.GradleInstallation/Gradle6.8/bin/gradle clean test'
+                                }
+                            }
+                        }
             }
-        }
-        stage('Run test') {
-            steps {
-                withGradle {
-                    sh '/var/jenkins_home/tools/hudson.plugins.gradle.GradleInstallation/gradle4.6/bin/gradle clean test'
-                }
-            }
-        }
-    }
-    post {
-        always {
-            script {
+    post{
+        always{
+            script{
                 allure([
                         includeProperties: false,
-                        jdk              : '',
-                        properties       : [],
+                        jdk				 : '',
+                        properties 		 : [],
                         reportBuildPolicy: 'ALWAYS',
-                        results          : [[path: 'build/allure-results']]
+                        results 		 : [[path:'build/allure-results']]
                 ])
             }
         }
     }
-
 }
