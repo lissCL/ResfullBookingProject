@@ -22,28 +22,6 @@ import static io.restassured.RestAssured.given;
 
 @RunWith(Parameterized.class)
 public class AuthParameterized extends BaseTest {
-    private String username;
-    private String password;
-    private int status;
-    private AuthModel authmodel;
-
-    public AuthParameterized(String username, String password, int status) {
-        super();
-        this.username = username;
-        this.password = password;
-        this.status = status;
-    }
-
-    @Parameterized.Parameters(name = "user: {0}, password: {1}")
-    public static Collection inputAuth() {
-        return Arrays.asList(new Object[][]{
-                {"admin", "password123", 200},
-                {"user", "password", 400},
-                {null, null, 400},
-                {"user", null, 400},
-                {null, "password", 400},
-        });
-    }
 
     @Test
     @Severity(SeverityLevel.CRITICAL)
@@ -57,11 +35,38 @@ public class AuthParameterized extends BaseTest {
                 .body(auth)
                 .post(AUTH);
 
-       // int code= response.getStatusCode();
-       // String token=response.path("token");
+        // int code= response.getStatusCode();
+        // String token=response.path("token");
         Assert.assertEquals("Status Code Should be: ", status, response.getStatusCode());
 
     }
+    @Parameterized.Parameters(name = "user: {0}, password: {1}")
+    public static Collection inputAuth() {
+        return Arrays.asList(new Object[][]{
+                {"admin", "password123", 200},
+                {"user", "password", 400},
+                {null, null, 400},
+                {"user", null, 400},
+                {null, "password", 400},
+        });
+    }
 
+
+
+
+
+
+
+    private String username;
+    private String password;
+    private int status;
+    private AuthModel authmodel;
+
+    public AuthParameterized(String username, String password, int status) {
+        super();
+        this.username = username;
+        this.password = password;
+        this.status = status;
+    }
 
 }

@@ -1,54 +1,21 @@
 package data.factory;
 
-import com.github.javafaker.Bool;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-
 import model.Booking;
-import model.BookingDates;
-import org.codehaus.groovy.ast.stmt.TryCatchStatement;
-import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import setup.BaseTest;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.List;
-import java.util.ResourceBundle;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.*;
 
 @RunWith(Parameterized.class)
 public class BookingData extends BaseTest {
-    private String firstname;
-    private String lastname;
-    private Integer totalprice;
-    private boolean depositpaid;
-    private BookingDates bookingdates;
-
-    private String bookingdates_checkin;
-    private String bookingdates_checkout;
-    private String additionalneeds;
-    private int status;
-
-
-    public BookingData(String firstname, String lastname, int totalprice, boolean depositpaid, String bookingdates_checkin, String bookingdates_checkout, String additionalneeds, int status) {
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.totalprice = totalprice;
-        this.depositpaid = depositpaid;
-        //this.bookingDates = new BookingDates(bookingdates_checkin, bookingdates_checkout);
-        this.bookingdates_checkin = bookingdates_checkin;
-        this.bookingdates_checkout = bookingdates_checkout;
-        this.additionalneeds = additionalneeds;
-        this.status = status;
-    }
-
 
     @Test
     public void requestwithData() {
@@ -60,28 +27,26 @@ public class BookingData extends BaseTest {
                 .body(bookigpost)
                 .post(BOOKING);
 
-        String actualFirstName= response.jsonPath().getString("booking.firstname");
-        Assert.assertEquals("firstname in response is not as expected",actualFirstName,firstname);
-        String actualLastName= response.jsonPath().getString("booking.lastname");
-        Assert.assertEquals("lastname in response is not as expected",actualLastName,lastname);
-        String actualCheckIn= response.jsonPath().getString("booking.bookingdates.checkin");
-        Assert.assertEquals("CheckIn in response is not as expected",bookingdates_checkin,actualCheckIn);
-        String actualCheckOut= response.jsonPath().getString("booking.bookingdates.checkout");
-        Assert.assertEquals("CheckOut in response is not as expected",bookingdates_checkout,actualCheckOut);
-        String actualAdditionalNeeds= response.jsonPath().getString("booking.additionalneeds");
-        Assert.assertEquals("Additional need is different",additionalneeds,actualAdditionalNeeds);
+        String actualFirstName = response.jsonPath().getString("booking.firstname");
+        Assert.assertEquals("firstname in response is not as expected", actualFirstName, firstname);
+        String actualLastName = response.jsonPath().getString("booking.lastname");
+        Assert.assertEquals("lastname in response is not as expected", actualLastName, lastname);
+        String actualCheckIn = response.jsonPath().getString("booking.bookingdates.checkin");
+        Assert.assertEquals("CheckIn in response is not as expected", bookingdates_checkin, actualCheckIn);
+        String actualCheckOut = response.jsonPath().getString("booking.bookingdates.checkout");
+        Assert.assertEquals("CheckOut in response is not as expected", bookingdates_checkout, actualCheckOut);
+        String actualAdditionalNeeds = response.jsonPath().getString("booking.additionalneeds");
+        Assert.assertEquals("Additional need is different", additionalneeds, actualAdditionalNeeds);
 
         Assert.assertNotNull("name should exist", (response.path("booking.firstname")));
         Assert.assertNotNull("lastname should exist", (response.path("booking.lastname")));
         Assert.assertNotNull("checkin should exist", (response.path("booking.bookingdates.checkin")));
 
-
-
-
-        Integer price=response.path("booking.totalprice");
-        Assert.assertTrue("the total Price should be positive and more than zero: actualResultis: "+price,price>0);;
+        Integer price = response.path("booking.totalprice");
+        Assert.assertTrue("the total Price should be positive and more than zero: actualResultis: " + price, price > 0);
+        ;
         Assert.assertNotNull("Id should exist", (response.path("bookingid")));
-        Assert.assertEquals(firstname,response.path("booking.firstname"));
+        Assert.assertEquals(firstname, response.path("booking.firstname"));
         Assert.assertEquals("Status Code Should be: ", status, response.statusCode());
 
     }
@@ -127,5 +92,23 @@ public class BookingData extends BaseTest {
         });
     }
 
+    private String firstname;
+    private String lastname;
+    private Integer totalprice;
+    private boolean depositpaid;
+    private String bookingdates_checkin;
+    private String bookingdates_checkout;
+    private String additionalneeds;
+    private int status;
 
+    public BookingData(String firstname, String lastname, int totalprice, boolean depositpaid, String bookingdates_checkin, String bookingdates_checkout, String additionalneeds, int status) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.totalprice = totalprice;
+        this.depositpaid = depositpaid;
+        this.bookingdates_checkin = bookingdates_checkin;
+        this.bookingdates_checkout = bookingdates_checkout;
+        this.additionalneeds = additionalneeds;
+        this.status = status;
+    }
 }
