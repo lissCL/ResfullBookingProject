@@ -5,7 +5,10 @@ import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.http.ContentType;
+import io.restassured.response.Response;
 import model.AuthModel;
+import org.apache.logging.log4j.core.config.Order;
+import org.hamcrest.core.StringContains;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -48,14 +51,16 @@ public class AuthParameterized extends BaseTest {
     public void requestAuthwithData() {
         AuthModel auth = new AuthModel(username, password);
 
-        int response = given()
-                .contentType(ContentType.JSON).log().all()
+        Response response = given()
+                .contentType(ContentType.JSON)
                 .header("Accept", "application/json")
                 .body(auth)
-                .post(AUTH)
-                .then()
-                .extract().statusCode();
-        Assert.assertEquals("Status Code Should be: ", status, response);
+                .post(AUTH);
+
+       // int code= response.getStatusCode();
+       // String token=response.path("token");
+        Assert.assertEquals("Status Code Should be: ", status, response.getStatusCode());
+
     }
 
 

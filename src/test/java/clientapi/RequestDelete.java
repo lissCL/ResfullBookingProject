@@ -67,9 +67,9 @@ public class RequestDelete extends BaseTest {
         int testId = getValidIdBooking();
         given()
                 .header("Cookie", "token=6809ef23ce1f8a2")
-                .when()
+        .when()
                 .delete(BOOKING+testId)
-                .then()
+        .then()
                 .assertThat()
                 .statusCode(HttpStatus.SC_FORBIDDEN);
 

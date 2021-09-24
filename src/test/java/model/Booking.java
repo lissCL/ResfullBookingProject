@@ -3,12 +3,11 @@ package model;
 
 public class Booking{
 	private String firstname;
-	private String additionalneeds;
+	private String lastname;
     private int totalprice;
 	private boolean depositpaid;
     private BookingDates bookingdates;
-	private String lastname;
-
+	private String additionalneeds;
 	public Booking(String firstname, String lastname, int totalprice, boolean depositpaid, String bookingdates_checkin, String bookingdates_checkout, String additionalneeds ) {
 		this.firstname = firstname;
 		this.lastname = lastname;

@@ -26,7 +26,7 @@ public class RequestGetBooking extends BaseTest {
 
         String response = given()
                 .get(BOOKING)
-                .then()
+            .then()
                 .assertThat()
                 .header("Content-Type", "application/json; charset=utf-8")
                 .statusCode(HttpStatus.SC_OK)
@@ -35,6 +35,7 @@ public class RequestGetBooking extends BaseTest {
 
         int idBooking = from(response).get("[0].bookingid");
         bookingMapint = from(response).getList("bookingid");
+
         Assert.assertNotNull("the response should contain items ", response);
         Assert.assertTrue("El {id} no existe en la lista de bookings", bookingMapint.contains(idBooking));
 
