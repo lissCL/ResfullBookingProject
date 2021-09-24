@@ -60,7 +60,6 @@ public class BookingData extends BaseTest {
                 .body(bookigpost)
                 .post(BOOKING);
 
-
         String actualFirstName= response.jsonPath().getString("booking.firstname");
         Assert.assertEquals("firstname in response is not as expected",actualFirstName,firstname);
         String actualLastName= response.jsonPath().getString("booking.lastname");
