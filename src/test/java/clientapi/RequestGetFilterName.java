@@ -10,19 +10,21 @@ import static org.hamcrest.Matchers.*;
 
 
 public class RequestGetFilterName extends BaseTest {
+    private String name = "Sally";
+    private String lastname = "Brown";
+
     @Test
     public void filterName(){
 
         given()
-                .queryParam("firstname","Eric")
-                .queryParam("lastname","Jackson")
-                .when()
+                .queryParam("firstname",name)
+                .queryParam("lastname",lastname)
+        .when()
                 .get(BOOKING)
-                .then()
+        .then()
+                .assertThat()
                 .statusCode(HttpStatus.SC_OK)
                 .body("[0].bookingid",notNullValue())
-                .and()
-                .body("[0].bookingid",equalTo(3))
                 .contentType(equalTo("application/json; charset=utf-8"));
 
     }
@@ -32,9 +34,10 @@ public class RequestGetFilterName extends BaseTest {
         given()
                 .queryParam("firstname","Erick")
                 .queryParam("lastname","Brown")
-                .when()
+        .when()
                 .get(BOOKING)
-                .then()
+        .then()
+                .assertThat()
                 .log().all()
                 .statusCode(HttpStatus.SC_NO_CONTENT)
                 .body("[0].bookingid",isEmptyOrNullString())
@@ -48,13 +51,12 @@ public class RequestGetFilterName extends BaseTest {
                 .queryParam("firstname","Erick")
                 .queryParam("lastname","Brown")
                 .log().all()
-                .when()
+        .when()
                 .get(BOOKING)
-                .then()
+        .then()
+                .assertThat()
                 .statusCode(HttpStatus.SC_NOT_FOUND)
                 .log().all()
                 .contentType(equalTo("application/json; charset=utf-8"));
-
-
     }
 }
