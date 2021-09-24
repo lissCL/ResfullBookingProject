@@ -40,7 +40,6 @@ public class RequestPost extends BaseTest {
                         "}")
                 .post(BOOKING)
                 .then()
-
                 .header("Content-Type", "application/json; charset=utf-8")
                 .statusCode(HttpStatus.SC_OK)
                 .body("bookingid", notNullValue());
