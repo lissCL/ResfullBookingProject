@@ -68,7 +68,7 @@ public class RequestPut extends BaseTest {
 //                .body("additionalneeds", Matchers.equalTo(additionalneeds))
                 .extract().statusCode();
 
-        //Assert.assertEquals("Status Code Should be: ", status, response);
+        Assert.assertEquals("Status Code Should be: ", status, response);
     }
 
     //    Request Put update Booking by Id with TOKEN

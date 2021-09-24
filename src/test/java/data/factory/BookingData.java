@@ -106,7 +106,7 @@ public class BookingData extends BaseTest {
 //                .post(BOOKING)
 //                .then()
 //                .extract().body().asString();
-//        Assert.assertEquals("Status Code Should be: ",status,response);
+        Assert.assertEquals("Status Code Should be: ",status,response);
 
         //Assert.assertNotNull("Id should exist", from(bodyResponse).get("bookingid"));
         //Assert.assertTrue( from(bodyResponse).get("bookingid"));
