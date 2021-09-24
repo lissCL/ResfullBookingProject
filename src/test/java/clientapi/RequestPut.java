@@ -28,7 +28,6 @@ public class RequestPut extends BaseTest {
     private Integer totalprice;
     private boolean depositpaid;
     private BookingDates bookingdates;
-
     private String bookingdates_checkin;
     private String bookingdates_checkout;
     private String additionalneeds;
@@ -58,6 +57,11 @@ public class RequestPut extends BaseTest {
                 .header("Accept", "application/json")
                 .body(bookigpost)
                 .put(BOOKING+Methods.getValidIdBooking());
+        Assert.assertEquals("Status Code Should be: ", status, response.statusCode());
+        Integer price=response.path("booking.totalprice");
+        Assert.assertTrue("the total Price should be positive and more than zero: actualResultis: "+price,price>0);;
+        Assert.assertNotNull("Id should exist", (response.path("bookingid")));
+        Assert.assertEquals(firstname,response.path("booking.firstname"));
         Assert.assertEquals("Status Code Should be: ", status, response.statusCode());
 //        int response = given()
 //                .header(BASIC_AUTHENTICATION_HEADER, BASIC_AUTHENTICATION)
@@ -101,7 +105,11 @@ public class RequestPut extends BaseTest {
                 .body(bookigpost)
                 .put(BOOKING+Methods.getValidIdBooking());
         Assert.assertEquals("Status Code Should be: ", status, response.statusCode());
-
+        Integer price=response.path("booking.totalprice");
+        Assert.assertTrue("the total Price should be positive and more than zero: actualResultis: "+price,price>0);;
+        Assert.assertNotNull("Id should exist", (response.path("bookingid")));
+        Assert.assertEquals(firstname,response.path("booking.firstname"));
+        Assert.assertEquals("Status Code Should be: ", status, response.statusCode());
 
                 //.body("$", hasKey("firstname"))
                 //.body(containsString("firstname"))
