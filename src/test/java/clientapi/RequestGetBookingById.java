@@ -35,6 +35,7 @@ public class RequestGetBookingById extends BaseTest {
                 .when()
                 .get(BOOKING + "100")
                 .then()
+                .assertThat()
                 .statusCode(HttpStatus.SC_NOT_FOUND);
     }
 }
