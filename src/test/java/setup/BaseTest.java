@@ -39,8 +39,6 @@ public abstract class BaseTest {
         logger.info("Iniciando la configuracion");
         RestAssured.requestSpecification = defaultRequestSpecification();
         //logger.info("Configuration exitosa.");
-
-
     }
 
     private static RequestSpecification defaultRequestSpecification() throws FileNotFoundException {
