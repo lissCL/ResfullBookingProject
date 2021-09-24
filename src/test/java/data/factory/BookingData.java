@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.restassured.http.ContentType;
 import model.AuthModel;
 import model.Booking;
-import model.Bookingdates;
+import model.BookingDates;
 import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.junit.Test;
@@ -26,7 +26,7 @@ public class BookingData extends BaseTest {
     private String lastname;
     private Integer totalprice;
     private boolean depositpaid;
-    private Bookingdates bookingdates;
+    private BookingDates bookingdates;
     private String additionalneeds;
     private String bookingdates_checkin;
     private String bookingdates_checkout;
@@ -38,7 +38,7 @@ public class BookingData extends BaseTest {
         this.lastname = lastname;
         this.totalprice = totalprice;
         this.depositpaid = depositpaid;
-        this.bookingdates = new Bookingdates(bookingdates_checkin, bookingdates_checkout);
+        //this.bookingDates = new BookingDates(bookingdates_checkin, bookingdates_checkout);
         this.bookingdates_checkin = bookingdates_checkin;
         this.bookingdates_checkout = bookingdates_checkout;
         this.additionalneeds = additionalneeds;

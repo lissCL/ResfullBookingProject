@@ -1,11 +1,13 @@
 package model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Booking{
 	private String firstname;
 	private String additionalneeds;
-	private Bookingdates bookingdates;
-	private int totalprice;
+    private int totalprice;
 	private boolean depositpaid;
+    private BookingDates bookingdates;
 	private String lastname;
 
 	public Booking(String firstname, String lastname, int totalprice, boolean depositpaid, String bookingdates_checkin, String bookingdates_checkout, String additionalneeds ) {
@@ -13,11 +15,11 @@ public class Booking{
 		this.lastname = lastname;
 		this.totalprice = totalprice;
 		this.depositpaid = depositpaid;
-		this.bookingdates = new Bookingdates(bookingdates_checkin, bookingdates_checkout);
+		this.bookingdates = new BookingDates(bookingdates_checkin, bookingdates_checkout);
 		this.additionalneeds = additionalneeds;
 	}
 
-	public void setFirstname(String firstname){
+    public void setFirstname(String firstname){
 		this.firstname = firstname;
 	}
 
@@ -33,11 +35,11 @@ public class Booking{
 		return additionalneeds;
 	}
 
-	public void setBookingdates(Bookingdates bookingdates){
+	public void setBookingdates(BookingDates bookingdates){
 		this.bookingdates = bookingdates;
 	}
 
-	public Bookingdates getBookingdates(){
+	public BookingDates getBookingdates(){
 		return bookingdates;
 	}
 
