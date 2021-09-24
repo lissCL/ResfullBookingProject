@@ -20,7 +20,7 @@ public class RequestPost extends BaseTest {
     Date convertedDate2 = null;
 
 
-    @Test//(testName = "Create Booking ")
+    //@Test//(testName = "Create Booking ")
     public void createBooking() {
 
         given()
